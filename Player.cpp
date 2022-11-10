@@ -2,19 +2,20 @@
 
 using namespace std;
 
-Player::Player (){
+Player::Player (){     //defalut constructor 
     strength = 100;
     lives = 1;
     weapon = "";
     num_hints = 0;
 }
-Player::Player(int lives, string weapon, int hint){
+Player::Player(int lives, string weapon, int hint){  //constructor
     strength = 100;
     lives = lives;
     weapon = weapon;
     num_hints = hint;
 }
 
+//getters and setters 
 void Player::reduceStrength(int takeAwayStrength){
     strength = strength - takeAwayStrength;
 }
