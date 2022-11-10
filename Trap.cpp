@@ -20,7 +20,7 @@ Trap::Trap(string text, string ans, string h){
     solved = false;
 }
 // We used getters and setters to retrieve the data from the h files we made
-// We had to return the variables in the getters, and set them equal to a value in the setters
+// We had to return the variables for the getters, and set them equal to a value in the setters
 string Trap::getRiddle(){
     return riddle;
 }
