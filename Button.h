@@ -12,13 +12,12 @@ class Button{
         int c;
         
     public:
-        Button();
-        Button(int row, int coloum);
-        //based on value of the button, it changes the Icon or pisture revelaed when the button is clicked
+        Button(); //defalut constructor
+        Button(int row, int coloum); //constructor 
+        //based on value of the button, it returns the corresponding picture
         string revealIcon(int value);
-        //shows message that you've won or lost the game 
-        void endGame(string result);
 
+        //getters and setters 
         void isClicked();
         bool getClicked();
 
@@ -31,7 +30,5 @@ class Button{
         void setC(int coloum);
         int getC();
 
-        void setIcon();
-        string getIcon(string icon);
 };
 #endif
