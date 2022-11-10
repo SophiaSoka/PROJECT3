@@ -12,6 +12,7 @@ class Pirate{
         int postionC;
         bool beenFound;
     public:
+        Pirate();
         Pirate(int strength, int postionR, int postionC);
 
         int getStrength();
