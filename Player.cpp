@@ -6,13 +6,13 @@ Player:: Player (){
     strength = 100;
     lives = 1;
     weapon = "";
-    hints = 0;
+    num_hints = 0;
 }
 Player:: Player(int lives, string weapon, int hint){
     strength = 100;
     lives = lives;
     weapon = weapon;
-    hints = hint;
+    num_hints = hint;
 }
 
 void Player:: reduceStrength(int takeAwayStrength){
@@ -36,9 +36,9 @@ int Player:: getLives(){
     return lives;
 }
 
-void Player:: setHints(int h){
-    hints = h;
+void Player:: setNumHints(int h){
+    num_hints = h;
 }
-int Player:: getHints(){
-    return hints;
+int Player:: getNumHints(){
+    return num_hints;
 }
