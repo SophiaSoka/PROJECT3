@@ -2,7 +2,8 @@
 #define PLAYER_H
 
 #include <iostream>
-#include <vector>
+#include "Trap.h"
+
 using namespace std;
 
 class Player{
@@ -10,9 +11,8 @@ class Player{
         int strength;
         string weapon;
         int lives;
-        vector<string> hints;
-        int currentRow;
-        int currentColoum;
+        int num_hints;
+        
     public:
         Player();
         Player(int lives, string weapon, int hints);
@@ -20,19 +20,14 @@ class Player{
         void reduceStrength(int takeAwayStrength);
         int getStrength();
 
-        void removeWeapon(string nameOfWeapon);
+        void removeWeapon();
         string getWeapons();
 
         void setLives(int lives);
         int getLives();
 
-        vector<string> getHints();
-
-        void setCurrentRow(int r); //maybe boolean 
-        int getCurrentRow();
-
-        void setCurrentColoum(int c); //maybe boolean 
-        int getCurrentRow();
+        void setNumHints(int hints);
+        int getNumHints();
 
 };
 #endif
