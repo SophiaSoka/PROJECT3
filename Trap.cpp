@@ -27,7 +27,7 @@ void Trap::setRiddle(string new_riddle){
 string Trap::getAnswer(){
     return answer;
 }
-void Trap:: setAnswer(string new_answer){
+void Trap::setAnswer(string new_answer){
     answer = new_answer;
 }
 
