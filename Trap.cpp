@@ -1,3 +1,8 @@
+// CSCI 1300 Fall 2022
+// Author: Sophia Soka and Matthew Keane
+// Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
+// Project 3 - Button.cpp
+
 #include "Trap.h"
 
 using namespace std;
