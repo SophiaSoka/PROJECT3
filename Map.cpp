@@ -1,3 +1,7 @@
+// CSCI 1300 Fall 2022
+// Author: Sophia Soka and Matthew Keane
+// Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
+// Project 3 - Button.cpp
 #include "Map.h"
 
 using namespace std;
@@ -544,4 +548,106 @@ void Map::displayMap()
         }
         cout << endl;
     }
+}
+
+
+/*parameters: (int) row, (int) col
+returns: void, just updates the value of buttons around the input corrdinates
+    (input value will be corrdinates of a pirate)
+    gets all buttons touching the input value by having two rested for loops 
+    checks the index is on map 
+    if the button isn't a pirate or trap it increments the value by one
+*/ 
+void Map::trueValue(int row, int col){
+
+}
+
+/*parameters: (int) row, (int) col
+returns: void, just updates the buttons around the input corrdinates
+    gets all buttons touching the input value by using two rested for loops 
+    checks the index is on map 
+    if the button isn't a pirate or trap and it hasn't been clicked yet 
+        it "clicks" the button (which will have correct image show up on map)
+        if the button is ocean (has value of zero) it will explode again
+*/ 
+void Map::explode(int row, int col){
+
+}
+
+//helper function for readTraps
+int split(string input_string, char separator, string arr[], int arr_size){
+    //returns 0 if the string is empty 
+    if(input_string.length() <= 0){
+        return 0;
+    }
+    int count = 0;
+    string word = "";
+    //loops through string one char at a time 
+    for(int i = 0; i < input_string.length(); i++){
+        //if the array is full it returns -1 with as many possible index's filled 
+        if (arr_size <= count){
+            return -1;
+        }
+        //if char is the separator the previous characters(word) is added to array and reset 
+        if(input_string[i] == separator){
+            arr[count] = word;
+            word = "";
+            count++;
+        }
+        //if char is not seperator its added to the temp string word 
+        else{
+            word += input_string[i];
+        }
+    }
+    //once gone through whole string, adds the lest "word" and returns the total number of strings added 
+    arr[count] = word;
+    count++;
+    return count;
+}
+
+/*parameters: (string) filename
+returns: int,-2, -1 or the number of traps in traps_ array 
+    creates helper variables 
+    checks if there is room in the array (if not return -2)
+    opens file (if not returns -1)
+    splits every line of file into an array 
+    puts elements of that array into Trap constructor 
+    puts the trap created into array of traps_ 
+    returns the total number of posts in array 
+*/
+//reads in a file and stores each line as a trap object in the traps 
+//alot like the readPosts or readLikes function in project 2
+int Map::readTraps(string filename){
+    string temp_arr[4];
+    Trap temp_trap;
+    ifstream fin;
+    string line;
+    int return_split;
+    if(traps_count_ == max_traps_){
+        return -2;
+    }
+    //opens file (if not returns -1)
+    fin.open(filename);
+    if(fin.fail()){
+        return -1;
+    }
+    while(getline(fin, line)){
+        if(line.length() > 0){
+            //splits every line of file into an array 
+            return_split = split(line, ',', temp_arr, 3);
+            if(return_split == 3){
+                //puts elements of that array into Post constructor 
+                Trap temp_trap(temp_arr[0], temp_arr[1], temp_arr[2]);
+                //puts the post created into array of posts 
+                traps_[traps_count_] = temp_trap;
+                traps_count_++;
+            }
+        }//if array is full it returns size and ends loop 
+        if(traps_count_ >= max_traps_){
+            return traps_count_;
+        }
+    }
+    //returns the total number of posts in array 
+    return traps_count_; 
+    
 }
