@@ -2,14 +2,14 @@
 
 using namespace std;
 
-Trap:: Trap(){
+Trap::Trap(){
     riddle = "";
     answer = "";
     hint = "";
     hasFound = false;
     solved = false;
 }
-Trap:: Trap(string text, string ans, string h){
+Trap::Trap(string text, string ans, string h){
     riddle = text;
     answer = ans;
     hint = h;
