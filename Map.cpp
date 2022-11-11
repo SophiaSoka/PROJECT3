@@ -1,8 +1,12 @@
 // CSCI 1300 Fall 2022
 // Author: Sophia Soka and Matthew Keane
 // Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
-// Project 3 - Button.cpp
+// Project 3 - Map.cpp
+
 #include "Map.h"
+#include "Button.h"
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -51,7 +55,7 @@ void Map::resetMap()
     {
         for (int j = 0; j < num_cols_; j++)
         {
-            map_data_[i][j] = UNEXPLORED;
+            map_data_[i][j].setValue(0);
         }
     }
 }
@@ -193,7 +197,7 @@ bool Map::isExplored(int row, int col)
     {
         return false;
     }
-    if (map_data_[row][col] == EXPLORED)
+    if (!map_data_[row][col].getClicked())
     {
         return true;
     }
@@ -272,7 +276,8 @@ bool Map::addPirate(int row, int col)
     pirates_positions_[pirates_count_][0] = row;
     pirates_positions_[pirates_count_][1] = col;
     pirates_positions_[pirates_count_][2] = false;
-    map_data_[row][col] = NPC;
+    map_data_[row][col].setValue(10);
+    trueValue(row, col);
     pirates_count_++;
     return true;
 }
@@ -309,7 +314,7 @@ bool Map::addTrap(int row, int col)
     traps_positions_[traps_count_][0] = row;
     traps_positions_[traps_count_][1] = col;
     traps_count_++;
-    map_data_[row][col] = ROOM;
+    map_data_[row][col].setValue(11);
     return true;
 }
 
@@ -400,6 +405,10 @@ bool Map::removeRoom(int row, int col)
  */
 void Map::exploreSpace(int row, int col)
 {
+    map_data_[player_position_[0]][player_position_[1]].isClicked();
+    if(map_data_[player_position_[0]][player_position_[1]].getValue() ==0){
+        explode(player_position_[0], player_position_[1]);
+    }
     for (int i = 0; i < pirates_count_; i++)
     {
         if (row == pirates_positions_[i][0] && col == pirates_positions_[i][1])
@@ -408,10 +417,6 @@ void Map::exploreSpace(int row, int col)
             pirates_positions_[i][2] = 1;
             return;
         }
-    }
-    if (isFreeSpace(row, col))
-    {
-        map_data_[player_position_[0]][player_position_[1]] = EXPLORED;
     }
 }
 
@@ -488,11 +493,11 @@ bool Map::move(char direction) //need to find a way to make first postion blue
     {
         exploreSpace(player_position_[0], player_position_[1]);
     }
-    else if (isTrapsLocation(player_position_[0], player_position_[1])){
-        return true;
-    }
     else{
-        map_data_[player_position_[0]][player_position_[1]] = EXPLORED;
+        map_data_[player_position_[0]][player_position_[1]].isClicked();
+    }
+    if(map_data_[player_position_[0]][player_position_[1]].getValue() == 0){
+        explode(player_position_[0],player_position_[1]);
     }
     return true;
 }
@@ -516,6 +521,7 @@ bool Map::move(char direction) //need to find a way to make first postion blue
  */
 void Map::displayMap()
 {
+    map_data_[0][0].isClicked();
     for (int i = 0; i < num_rows_; i++)
     {
         for (int j = 0; j < num_cols_; j++)
@@ -524,56 +530,65 @@ void Map::displayMap()
             {
                 cout << PARTY;
             }
-            else if (map_data_[i][j] == "💀")
-            { // NPC location, have to check if they were found yet
-                for (int k = 0; k < pirates_count_; k++)
-                {
-                    if (pirates_positions_[k][0] == i && pirates_positions_[k][1] == j)
-                    {
-                        if (pirates_positions_[k][2] == true)
-                        {
-                            cout << NPC;
-                        }
-                        else
-                        {
-                            cout << UNEXPLORED;
-                        }
-                    }
-                }
+            else if (map_data_[i][j].getClicked()){
+                cout << map_data_[i][j].revealIcon(map_data_[i][j].getValue());
             }
-            else
-            {
-                cout << map_data_[i][j];
+            else{
+                cout << "⬜";
             }
         }
         cout << endl;
     }
 }
 
-
-/*parameters: (int) row, (int) col
+/*
+parameters: (int) row, (int) col
 returns: void, just updates the value of buttons around the input corrdinates
     (input value will be corrdinates of a pirate)
     gets all buttons touching the input value by having two rested for loops 
     checks the index is on map 
     if the button isn't a pirate or trap it increments the value by one
 */ 
+
 void Map::trueValue(int row, int col){
-
+    for (int x = row-1; x <= row+1; x++){
+        for(int y = col-1; y<= col+1; y++){
+            if(x>=0 && y < 12){
+                if(y >= 0 && y < 12){
+                    if(map_data_[x][y].getValue() != 10 && map_data_[x][y].getValue() != 11){
+                        map_data_[x][y].setValue(map_data_[x][y].getValue()+1);
+                    }
+                }
+            }
+        }
+    }
 }
-
-/*parameters: (int) row, (int) col
+/*
+parameters: (int) row, (int) col
 returns: void, just updates the buttons around the input corrdinates
     gets all buttons touching the input value by using two rested for loops 
     checks the index is on map 
     if the button isn't a pirate or trap and it hasn't been clicked yet 
         it "clicks" the button (which will have correct image show up on map)
         if the button is ocean (has value of zero) it will explode again
-*/ 
+*/
 void Map::explode(int row, int col){
-
+    for (int x = row-1; x <= row+1; x++){
+        for(int y = col-1; y<= col+1; y++){
+            if(x>=0 && y < 12){
+                if(y >= 0 && y < 12){
+                    if((map_data_[x][y].getValue() != 10 && map_data_[x][y].getValue() != 11) && !(map_data_[x][y].getClicked())){
+                        map_data_[x][y].isClicked();
+                        if(map_data_[x][y].getValue() == 0){
+                            explode(x,y);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-
+/*
 //helper function for readTraps
 int split(string input_string, char separator, string arr[], int arr_size){
     //returns 0 if the string is empty 
@@ -604,7 +619,7 @@ int split(string input_string, char separator, string arr[], int arr_size){
     count++;
     return count;
 }
-
+*/
 /*parameters: (string) filename
 returns: int,-2, -1 or the number of traps in traps_ array 
     creates helper variables 
@@ -617,7 +632,7 @@ returns: int,-2, -1 or the number of traps in traps_ array
 */
 //reads in a file and stores each line as a trap object in the traps 
 //alot like the readPosts or readLikes function in project 2
-int Map::readTraps(string filename){
+/*int Map::readTraps(string filename){
     string temp_arr[4];
     Trap temp_trap;
     ifstream fin;
@@ -651,3 +666,4 @@ int Map::readTraps(string filename){
     return traps_count_; 
     
 }
+*/
