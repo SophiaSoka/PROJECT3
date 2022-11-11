@@ -39,6 +39,15 @@ int main()
     assert(map.addPirate(10, 0)); // should fail due to max number of NPCs == 5
     map.displayMap();
     
+    char dir;
+    for(int i = 0; i < 100; i++){
+        cout << "enter which way you want to move (w,a,s,d)" << endl;
+        cin >> dir;
+        map.move(dir);
+        map.displayMap();
+    }
+    
+    /*
     cout << "Let's move a little. First, down:" << endl;
     map.move('s'); // go down
     map.displayMap();
@@ -61,7 +70,6 @@ int main()
     cout << "... and move left off" << endl;
     map.move('a');
     map.displayMap();
-    /*
     cout << "Let's remove that room" << endl;
     assert(map.removeRoom(2, 3));
     map.displayMap();
