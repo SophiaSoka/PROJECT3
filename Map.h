@@ -13,12 +13,12 @@ using namespace std;
 class Map
 {
 private:
-    const string UNEXPLORED = "⬜"; // marker for unexplored spaces
-    const string EXPLORED = "🟦";   // marker for explored spaces
-    const string ROOM = "📜";       // marker for room locations
-    const string NPC = "💀";        // marker for NPC locations
+    //const string UNEXPLORED = "⬜"; // marker for unexplored spaces
+    //const string EXPLORED = "🟦";   // marker for explored spaces
+    //const string ROOM = "📜";       // marker for room locations
+    //const string NPC = "💀";        // marker for NPC locations
     const string PARTY = "🧍";      // marker for party position
-    const string EXIT = "E";       // marker for dungeon exit
+    //const string EXIT = "E";       // marker for dungeon exit
 
     static const int num_rows_ = 12; // number of rows in map
     static const int num_cols_ = 12; // number of columns in map
@@ -64,6 +64,8 @@ public:
     //new function that we added
     void trueValue(int row, int col);
     void explode(int row, int col);
+    bool addAllPirates(int num);
+    bool addAllTraps(int num);
     int readTraps(string filename);
 
 };
