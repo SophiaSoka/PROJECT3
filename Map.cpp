@@ -588,6 +588,51 @@ void Map::explode(int row, int col){
         }
     }
 }
+
+bool Map::addAllPirates(int num){
+    //seed value 
+    srand((unsigned) time(NULL));
+    int count = 0;
+    int row;
+    int col;
+    while(count < num){
+        row = (rand() % 12);
+        col = (rand() % 12);
+        if (addPirate(row, col)){
+            count++;
+        }
+        else if(count >= max_pirates_){
+            return false;
+        }
+    }
+    if(num == count){
+        return true;
+    }
+    return true;
+}
+
+bool Map::addAllTraps(int num){
+    //seed value 
+    srand((unsigned) time(NULL));
+    int count = 0;
+    int row;
+    int col;
+    while(count < num){
+        row = (rand() % 12);
+        col = (rand() % 12);
+        if (addTrap(row, col)){
+            count++;
+        }
+        else if(count>= max_traps_){
+            return false;
+        }
+    }
+    if(num == count){
+        return true;
+    }
+    return false;
+}
+
 /*
 //helper function for readTraps
 int split(string input_string, char separator, string arr[], int arr_size){
