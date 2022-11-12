@@ -17,8 +17,19 @@ int main()
     map.displayMap(); // starting point
     cout << "Default constructor: " << endl;
     cout << "Room #: " << map.getTrapsCount() << endl;
-    cout << "Let's add some traps: " << endl;
+    cout << "Let's add some traps and pirates: " << endl;
+    assert(map.addAllTraps(5));
+    assert(map.addAllPirates(10));
+    map.displayMap();
     
+    char dir;
+    for(int i = 0; i < 100; i++){
+        cout << "enter which way you want to move (w,a,s,d)" << endl;
+        cin >> dir;
+        map.move(dir);
+        map.displayMap();
+    }
+    /*
     assert(map.addTrap(2, 3));
     assert(map.addTrap(8, 11));
     assert(map.addTrap(2, 7));
@@ -38,15 +49,6 @@ int main()
     assert(map.addPirate(9, 0));
     assert(map.addPirate(10, 0)); // should fail due to max number of NPCs == 5
     map.displayMap();
-    
-    char dir;
-    for(int i = 0; i < 100; i++){
-        cout << "enter which way you want to move (w,a,s,d)" << endl;
-        cin >> dir;
-        map.move(dir);
-        map.displayMap();
-    }
-    
     /*
     cout << "Let's move a little. First, down:" << endl;
     map.move('s'); // go down
