@@ -48,3 +48,52 @@ void Player::setNumHints(int h){
 int Player::getNumHints(){
     return num_hints;
 }
+
+void Player::printInventory(){
+    cout << "----Player Info----" << endl;
+    cout << "Strength:   | " << strength << endl;
+    cout << "Lives:      | " << lives <<endl;
+    cout << "Weapon:     | " << weapon << endl;
+    cout << "Hints:      | " << num_hints << endl;
+    cout << "-------------------" << endl;
+}
+
+//independent function 
+/*parameter: takes in a char, representing the resluts of teh game
+returns: void, prints out differnt information based on what the user decided 
+    prints out the resluts of the game and asks if they want to play again
+    if the dont't want to play again it asks them if they would like to see the leader board
+    if they say yes it is printed out 
+*/
+void endGame(char result){
+    if(result == 'w'){
+        cout << "You have collected three keys and won the game!!" << endl;
+    }
+    else if(result == 'l'){
+        cout << "You have lost the game here. Better luck next time!!" << endl;
+    }
+    char play;
+    cout << "Would you like to play again? (y/n)" << endl;
+    cin >> play;
+    if(play == 'y'){
+        // something to craete a new board and player inorder to rerun the game
+    }
+    else if(play == 'n'){
+        char view;
+        cout << "Would you like to see the leader board? (y/n)" << endl;
+        cin >> view;
+        if(view == 'y'){
+            //print leader board 
+        }
+        else if(view == 'n'){
+            cout << "Ok, see you again soon" << endl;
+        }
+        else{
+            cout << "Invalid input." << endl;
+        }
+    }
+    else{
+        cout << "Invalid Input." << endl;
+    }
+}
+
