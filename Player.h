@@ -33,6 +33,7 @@ class Player{
 
         void setNumHints(int hints);
         int getNumHints();
+        void printInventory();
 
 };
 #endif
