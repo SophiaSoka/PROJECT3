@@ -35,6 +35,41 @@ int main(){
     //PRINTS INSTRUCTIONS FOR THE GAME 
 
     //MR.MERCHANT DO YOUR THING HERE 
+   
+    int input;
+    int weapon = 30;
+    int hint = 20;
+    int extra_life = 50;
+    cout << "Mr. Jones, it is good to see you again. Have you come back for more supplies?" << endl;
+    cout << "Choose one of the following:" << endl;
+    cout << "1.) Weapons: You will need a weapon to fight the pirates along your journey" << endl;
+    cout << "2.) Hints: In your journey, there will be riddles you will need to solve in order to not get killed from a boobytrap." << endl;
+    cout << "3.) Extra-life: You may need an extra-life if you are unable to solve a riddle or fight a pirate." << endl;
+    cin >> input;
+    cout << endl;
+    if(input == 1)
+    {
+        cout << "There are a couple of different weapon options, each has the same damage level though." << endl;
+
+        cout << "Choose one of the following:" << endl;
+        cout << "1.) Sword (50 damage) (20 coins)" << endl;
+        cout << "2.) Hatchet (50 damage) (20 coins)" << endl;
+        cout << "3.) Machete (50 damage) (20 coins)" << endl;
+        cout << "4.) Cancel" << endl;
+        cin >> weapon;
+    }
+    if(input == 2)
+    {
+        int line;
+        ifstream myFile;
+        myFile.open("hints.txt");
+        cout << "There are five different hints for the riddles in the game which if answered correctly will give you the keys." << endl;
+    }
+    if(input == 3)
+    {
+        cout << "You have the option of receiving an extra-life in case you run into a pirate without a weapon or fail to answer a riddle correctly." << endl;
+        cout << "1.) Claim: One extra-life." << extra_life << endl;
+    }
 
     //player will have parameters onec merchant is written 
     //Player player(lives, weapon, hints);
