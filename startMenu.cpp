@@ -37,9 +37,9 @@ int main(){
     //MR.MERCHANT DO YOUR THING HERE 
    
     int input;
-    int weapon = 30;
-    int hint = 20;
-    int extra_life = 50;
+    int weapon;
+    int hint;
+    int extra_life;
     cout << "Mr. Jones, it is good to see you again. Have you come back for more supplies?" << endl;
     cout << "Choose one of the following:" << endl;
     cout << "1.) Weapons: You will need a weapon to fight the pirates along your journey" << endl;
@@ -55,20 +55,60 @@ int main(){
         cout << "1.) Sword (50 damage) (20 coins)" << endl;
         cout << "2.) Hatchet (50 damage) (20 coins)" << endl;
         cout << "3.) Machete (50 damage) (20 coins)" << endl;
-        cout << "4.) Cancel" << endl;
+        cout << "4.) Input 4 if you want to cancel" << endl;
         cin >> weapon;
+        if(weapon == 1)
+        {
+            cout << "Acquired sword (50 damage)." << endl;
+        }
+        if(weapon == 2)
+        {
+            cout << "Acquired hatchet (50 damage)." << endl;
+        }
+        if(weapon == 3)
+        {
+            cout << "Acquired Machete (50 damage)." << endl;
+        }
+        if(weapon == 4)
+        {
+            cout << "Cancel." << endl;
+        }
     }
     if(input == 2)
     {
-        int line;
-        ifstream myFile;
-        myFile.open("hints.txt");
         cout << "There are five different hints for the riddles in the game which if answered correctly will give you the keys." << endl;
+        cout << "1.) Input 1 if you want to receive hints." << endl;
+        cout << "2.) Input 2 if you want to cancel." << endl;
+        cin >> hint;
+        if(hint == 1)
+        {
+            cout << "Hints:" << endl;
+            cout << "1.) Think about the high sea during a storm..." << endl;
+            cout << "2.) Most pirates say aarrr matey" << endl;
+            cout << "3.) Where do you put a ship when you are done using it" << endl;
+            cout << "4.) Pirates tend to get lost here" << endl;
+            cout << "5.) A pirate is known for saying this when frustrated" << endl;
+        }
+        if(hint == 2)
+        {
+            cout << "Cancel." << endl;
+        }
+
     }
     if(input == 3)
     {
         cout << "You have the option of receiving an extra-life in case you run into a pirate without a weapon or fail to answer a riddle correctly." << endl;
-        cout << "1.) Claim: One extra-life." << extra_life << endl;
+        cout << "1.) One extra-life." << endl;
+        cout << "2.) Input 2 if you want to cancel." << endl;
+        cin >> extra_life;
+        if(extra_life == 1)
+        {
+            cout << "Acquired extra life." << endl;
+        }
+        if(extra_life == 2)
+        {
+            cout << "Cancel." << endl;
+        }
     }
 
     //player will have parameters onec merchant is written 
