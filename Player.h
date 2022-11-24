@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "Trap.h"
+#include "Pirate.h"
 
 using namespace std;
 
@@ -22,6 +23,9 @@ class Player{
         Player();
         Player(int lives, string weapon, int hints);
 
+        void fightPirate(Pirate pirate);
+        bool solveTrap(Trap trap);
+    
         void reduceStrength(int takeAwayStrength);
         int getStrength();
 
@@ -34,6 +38,6 @@ class Player{
         void setNumHints(int hints);
         int getNumHints();
         void printInventory();
-
+        void endGame(char result);
 };
 #endif
