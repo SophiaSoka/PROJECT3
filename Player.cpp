@@ -4,6 +4,7 @@
 // Project 3 - Button.cpp
 
 #include "Player.h"
+#include "Pirate.h"
 
 using namespace std;
 
@@ -56,6 +57,100 @@ void Player::printInventory(){
     cout << "Weapon:     | " << weapon << endl;
     cout << "Hints:      | " << num_hints << endl;
     cout << "-------------------" << endl;
+}
+
+
+void Player::fightPirate(Pirate pirate){
+    char display;
+    char useWeapon;
+    bool lostWeapon = false;;
+    int proablilty = 6;
+    cout << "ARGHHHH! You've run into a Pirate and must fight it" << endl;
+    cout << "You have a 60% chance of losing to a Pirate without using a weapon "<< endl;
+    cout << "and a 30% chance of losing to a Pirate while using a weapon. "<< endl;
+    cout << "But if you chosse to use your weapon you have a 10% chance of losing that weapon and not being able to use it again" << endl;
+    cout << "If you lose against a pirate, the strength of the pirate will be subtracted from your strength." << endl;
+    cout << "This pirate has a strength of " << pirate.getStrength() << "!" << endl;
+    cout << endl;
+    cout << "Would you like to display your Inventory? (y/n)"<< endl;
+    cin >> display;
+    if(display == 'y'){
+        printInventory();
+    }
+    else if(display == 'n'){
+        cout << "Ok. ";
+    }
+    else{
+        cout << "This was not a valid input, so we understand that as no" << endl;
+    }
+
+    if(weapon != ""){
+        cout << "Would you like to use your " << weapon << "? (y/n)" << endl;
+        cin >> useWeapon;
+        if(useWeapon == 'y'){
+            proablilty = 3;
+            if((rand()%10) == 9){
+                lostWeapon = true;
+                weapon = "";
+            }
+        }
+        else if(useWeapon == 'n'){
+            cout << "Ok. ";
+        }
+        else{
+            cout << "This was not a valid input, so we understand that as no" << endl;
+        }
+    }
+    else{
+        cout << "It doesn't look like you have a weapon to fight with. Good Luck!" << endl;
+    }
+
+    cout << "Currentily flighting pirate..." << endl;
+    int rand_result = (rand() % 9);
+    if(rand_result >= proablilty){
+        cout << "You won the fight!! You still have a strength of " << strength << endl;
+    }
+    else if(strength >= 0){
+        strength -= pirate.getStrength();
+        cout << "You lost the fight:( You now have a strength of " << strength << endl;
+    }
+    else{
+        endGame('l');
+    }
+    return;
+}
+
+bool Player:: solveTrap(Trap trap){
+    string user_answer;
+    char useHint;
+    cout << "You've found a riddle!! Once you solve the riddle you will get a key, getting you closer to treasure!!" << endl;
+    cout << "If you have a hint you may use it, but once you run out of hints theres no way to get more!!"<< endl;
+    cout << "The riddle is: " << trap.getRiddle()<< endl;
+    cout << "//Maybe print out options for answers" << endl;
+    if (num_hints > 0){
+        cout << "Would you like to use one of your hints? (y/n)" << endl;
+        cin >> useHint;
+        if(useHint == 'y'){
+            cout << "Your hint is: " << trap.getHint() << endl;
+            num_hints--;
+        }
+    }else{
+        cout << "It doesn't look like you have any hints, good luck!!" << endl;
+    }
+    cout << "Please enter your guess: " << endl;
+    cin >> user_answer;
+    if(user_answer == trap.getAnswer()){
+        cout << "Horray!! You solved it" << endl;
+        cout << endl;
+        //keys ++; ??
+        return true;
+    }else{
+        cout << "You got it wrong :(" << endl;  //do we wanna give them another guess or have them die 
+        cout << endl;
+        return false;
+    }
+    
+    return false;
 }
 
 //independent function 
