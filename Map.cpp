@@ -7,13 +7,18 @@
 #include "Button.h"
 #include <iostream>
 #include <fstream>
-#include<cstdlib>
+#include <cstdlib>
 
 using namespace std;
 
 Map::Map()
 {
     resetMap();
+}
+
+Player Map::createPlayer(int l, string w, int h){
+    Player player1(l, w, h);
+    return player1;
 }
 
 /*
@@ -320,81 +325,6 @@ bool Map::addTrap(int row, int col)
 }
 
 /*
- * Algorithm: Removes the NPC at (row, col) from the map
- * loop i from 0 to npc_count_
- *      if npc_position[i] is (row, col)
- *          swap npc_position[npc_count_-1] with npc_position[i]
- *          reset npc_position[npc_count_-1][0] and npc_position[npc_count_-1][1] to -1
- *          reset npc_position[npc_count_-1][2] to 0
- *          decrement npc_count_
- *          set map data at (row, col) to explored
- *          return true
- * return false
- *
- * Parameters: row (int), col (int)
- * Return: boolean (bool)
- 
-bool Map::showPirate(int row, int col)
-{
-    for (int i = 0; i < npc_count_; i++)
-    {
-        if (npc_positions_[i][0] == row && npc_positions_[i][1] == col)
-        {
-            // swap i'th npc with last npc
-            npc_positions_[i][0] = npc_positions_[npc_count_ - 1][0];
-            npc_positions_[i][1] = npc_positions_[npc_count_ - 1][1];
-            npc_positions_[i][2] = npc_positions_[npc_count_ - 1][2];
-            // reset last npc
-            npc_positions_[npc_count_ - 1][0] = -1;
-            npc_positions_[npc_count_ - 1][1] = -1;
-            npc_positions_[npc_count_ - 1][2] = false;
-            // decrement npc_count_
-            npc_count_--;
-            // set map data to explored
-            map_data_[row][col] = EXPLORED;
-            return true;
-        }
-    }
-    return false;
-}
-*/
-/*
- * Algorithm: Removes the room at (row, col) from the map
- * loop i from 0 to room_count_
- *      if room_position[i] is (row, col)
- *          swap room_position[room_count_-1] with room_position[i]
- *          reset room_position[room_count_-1][0] and room_position[room_count_-1][1] to -1
- *          decrement room_count_
- *          set map data at (row, col) to explored
- *          return true
- * return false
- *
- * Parameters: row (int), col (int)
- * Return: boolean (bool)
- 
-bool Map::removeRoom(int row, int col)
-{
-    for (int i = 0; i < room_count_; i++)
-    {
-        if (room_positions_[i][0] == row && room_positions_[i][1] == col)
-        {
-            // swap i'th room with last room
-            room_positions_[i][0] = room_positions_[room_count_ - 1][0];
-            room_positions_[i][1] = room_positions_[room_count_ - 1][1];
-            // reset last room
-            room_positions_[room_count_ - 1][0] = -1;
-            room_positions_[room_count_ - 1][1] = -1;
-            // decrement room_count_
-            room_count_--;
-            // set map data to explored
-            map_data_[row][col] = EXPLORED;
-            return true;
-        }
-    }
-    return false;
-}
-*/
-/*
  * Algorithm: Mark (row, col) as explored, either revealing NPC or empty space
  * if (row, col) is NPC location
  *      mark npc at player_position_ as found
@@ -407,16 +337,40 @@ bool Map::removeRoom(int row, int col)
 void Map::exploreSpace(int row, int col)
 {
     map_data_[player_position_[0]][player_position_[1]].isClicked();
-    if(map_data_[player_position_[0]][player_position_[1]].getValue() ==0){
-        explode(player_position_[0], player_position_[1]);
-    }
+    //if(map_data_[player_position_[0]][player_position_[1]].getValue() == 0){
+    //    explode(player_position_[0], player_position_[1]);
+    //}
     for (int i = 0; i < pirates_count_; i++)
     {
         if (row == pirates_positions_[i][0] && col == pirates_positions_[i][1])
         {
-            // mark NPC as found
-            pirates_positions_[i][2] = 1;
-            return;
+            if(!pirates_[i].getBeenFound()){
+                pirates_positions_[i][2] = 1;
+                player1.fightPirate(pirates_[i]);
+                pirates_[i].wasFound();
+                return;
+            }
+            else{
+                cout << "This is a pirate that has already been found. Keep exploring new spaces!" << endl;
+            }
+        }
+    }
+    for(int j = 0; j < traps_count_; j++){
+        if(row == traps_positions_[j][0] && col == traps_positions_[j][1])
+        {
+            if(!traps_[j].getFound()){
+                traps_[j].wasFound();
+                if(player1.solveTrap(traps_[j])){
+                    traps_[j].wasSolved();
+                }
+                return;
+            }
+            else if(!traps_[j].getSolved()){
+                //has already been found but hasn't been solved what do we do?
+            }
+            else{
+                cout << "This is trap has already been solved. Keep exploring new spaces!" << endl;
+            }
         }
     }
 }
@@ -489,14 +443,8 @@ bool Map::move(char direction) //need to find a way to make first postion blue
     default:
         return false;
     }
-    // if new location is an NPC location, mark as explored
-    if (isPiratesLocation(player_position_[0], player_position_[1]))
-    {
-        exploreSpace(player_position_[0], player_position_[1]);
-    }
-    else{
-        map_data_[player_position_[0]][player_position_[1]].isClicked();
-    }
+    exploreSpace(player_position_[0], player_position_[1]);
+
     if(map_data_[player_position_[0]][player_position_[1]].getValue() == 0){
         explode(player_position_[0],player_position_[1]);
     }
@@ -600,6 +548,7 @@ bool Map::addAllPirates(int num){
         row = (rand() % 12);
         col = (rand() % 12);
         if (addPirate(row, col)){
+            pirates_[count] = Pirate(((rand()%10)*10), row, col);
             count++;
         }
         else if(count >= max_pirates_){
@@ -634,7 +583,6 @@ bool Map::addAllTraps(int num){
     return false;
 }
 
-/*
 //helper function for readTraps
 int split(string input_string, char separator, string arr[], int arr_size){
     //returns 0 if the string is empty 
@@ -665,8 +613,9 @@ int split(string input_string, char separator, string arr[], int arr_size){
     count++;
     return count;
 }
-*/
-/*parameters: (string) filename
+
+/*
+parameters: (string) filename
 returns: int,-2, -1 or the number of traps in traps_ array 
     creates helper variables 
     checks if there is room in the array (if not return -2)
@@ -678,7 +627,7 @@ returns: int,-2, -1 or the number of traps in traps_ array
 */
 //reads in a file and stores each line as a trap object in the traps 
 //alot like the readPosts or readLikes function in project 2
-/*int Map::readTraps(string filename){
+int Map::readTraps(string filename){
     string temp_arr[4];
     Trap temp_trap;
     ifstream fin;
@@ -710,6 +659,4 @@ returns: int,-2, -1 or the number of traps in traps_ array
     }
     //returns the total number of posts in array 
     return traps_count_; 
-    
 }
-*/
