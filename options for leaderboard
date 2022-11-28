@@ -1,0 +1,76 @@
+// I think the class may be easier to implement into the code
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+void print_leadeboard()
+{
+    vector<int> vector;
+    for(int i = 0; i < vector.size(); i++)
+    {
+        cout << vector[i] << endl;
+    }
+    cout << endl;
+}
+
+void game()
+{
+    vector<int> guesses;
+    int count = 0;
+    int input;
+    ofstream file1;
+    file1.open("best_score.txt");
+
+    int best_score;
+    cin >> best_score;
+
+    ofstream file2;
+    file2.open("best_score.txt");
+    if(count < best_score)
+    {
+        cout << count << endl;
+    }
+    else
+    {
+        cout << best_score << endl;
+    }
+    file1.close();
+    file2.close();
+}
+
+or
+
+class Leader
+{
+  public:
+    string time;
+    string name;
+};
+
+class LeaderBoard
+{
+  public:
+    vector<int> leaders;
+    void readFromFile(string fname);
+    void sort();
+    void writeToFile(string fname);
+};
+
+void LeaderBoard::readFromFile(string fname)
+  ifstream file(fname);
+  string line;
+  
+  // skip header
+  file.getline(line);
+  file.getline(line);
+  
+  // read the rest
+  while(file.getline(line))
+  {
+  // split into parts
+  Leader leader(the parts);
+  leaders.push_back(leader);
+  }
+}
