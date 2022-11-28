@@ -10,7 +10,7 @@ Person::Person(){
 }
 
 // Here I declared the variables as different names to store them
-Person::Person(int t, int n){
+Person::Person(int t, string n){
     time = t;
     name = n;
 }
@@ -23,7 +23,7 @@ int Person::getTime(){
 void Person::setTime(){
     time = t;
 }
-int Person::getName(){
+string Person::getName(){
     return name;
 }
 void Person::setName(){
