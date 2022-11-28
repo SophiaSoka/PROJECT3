@@ -19,8 +19,8 @@ class Person{
 
         vector<Person> leaderboard;
 
-        void setName(int name);
-        int getName();
+        void setName(string name);
+        string getName();
 
         void setTime(int time);
         int getTime();
