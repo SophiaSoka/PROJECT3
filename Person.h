@@ -6,18 +6,18 @@
 #include <string>
 using namespace std;
 
-class Person(){
+class Person{
     // We had to declare the variables in the private
     private:
-        int name;
+        string name;
         int time;
     // We used getters to retrieve the data
     // We used setters to read the data
     public:
         Person();
-        Person(int name, int time);
+        Person(string name, int time);
 
-        vector<person> leaderboard;
+        vector<Person> leaderboard;
 
         void setName(int name);
         int getName();
