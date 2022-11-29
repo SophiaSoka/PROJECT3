@@ -18,6 +18,9 @@ class Person{
         Person(string name, int time);
 
         vector<Person> leaderboard;
+        void printLeaderboard();
+        void updateLeaderboardFile();
+        bool addPerson(Person new_person);
 
         void setName(string name);
         string getName();
