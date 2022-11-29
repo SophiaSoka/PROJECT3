@@ -1,7 +1,7 @@
 // CSCI 1300 Fall 2022
 // Author: Sophia Soka and Matthew Keane
 // Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
-// Project 3 - Button.cpp
+// Project 3 - Map.h
 
 #ifndef MAP_H
 #define MAP_H
@@ -35,7 +35,6 @@ private:
     int traps_count_; // stores number of sites currently on map
 public:
     Map();
-    Player createPlayer(int l, string w, int h);
     void resetMap();
     // getters
     int getPlayerRow();
@@ -55,18 +54,19 @@ public:
 
     // other
     void displayMap();
-    bool move(char);
+    int move(char);
     bool addPirate(int row, int col);
     bool addTrap(int row, int col);
     bool showPirate(int row, int col);
     bool showTrap(int row, int col);
-    void exploreSpace(int row, int col);
+    int exploreSpace(int row, int col);
     //new function that we added
     void trueValue(int row, int col);
     void explode(int row, int col);
     bool addAllPirates(int num);
-    bool addAllTraps(int num);
-    int readTraps(string filename);
-
-};
+    //bool addAllTraps(int num);
+    int readAndAddTraps(string filename);
+    Trap getTrapAt(int index);
+    Pirate getPirateAt(int index);
+    };
 #endif
