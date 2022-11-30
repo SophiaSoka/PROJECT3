@@ -1,5 +1,10 @@
-#include <iostream>
+// CSCI 1300 Fall 2022
+// Author: Sophia Soka and Matthew Keane
+// Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
+// Project 3 - Person.cpp
+
 #include <fstream>
+#include <iostream>
 #include "Person.h"
 using namespace std;
 
@@ -10,8 +15,8 @@ Person::Person(){
 }
 
 // Here we declared the variables using t and n to have them hold values
-Person::Person(int m, string n){
-    moves = t;
+Person::Person(string n, int m){
+    moves = m;
     name = n;
 }
 
