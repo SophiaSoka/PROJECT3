@@ -9,6 +9,7 @@
 #include <iostream>
 using namespace std;
 
+// declared the private values as a bool and ints for us to use
 class Button{
     private:
         bool clicked;
@@ -18,11 +19,12 @@ class Button{
         
     public:
         Button(); //defalut constructor
-        Button(int row, int coloum); //constructor 
+        Button(int row, int coloum); // constructor 
         //based on value of the button, it returns the corresponding picture
         string revealIcon(int value);
 
-        //getters and setters 
+        // used setters to read the data
+        // used getters to retrieve the data
         void isClicked();
         bool getClicked();
 

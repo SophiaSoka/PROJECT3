@@ -3,24 +3,21 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
-class Person{
+class Person(){
     // We had to declare the variables in the private
     private:
         string name;
         int time;
     // We used getters to retrieve the data
     // We used setters to read the data
+    // We declared a vector in the public to hold the players for the leaderboard
     public:
-        Person();
-        Person(string name, int time);
+        Person(); // default constructor
+        Person(string name, int time); // constructor with parameters
 
-        vector<Person> leaderboard;
-        void printLeaderboard();
-        void updateLeaderboardFile();
-        bool addPerson(Person new_person);
+        vector<person> leaderboard;
 
         void setName(string name);
         string getName();

@@ -6,12 +6,14 @@
 #include <iostream>
 #include "Button.h"
 
+// We had to set the variables equal to zero and the bool equal to false
 Button::Button(){ //defalut constructor 
     clicked = false;
     value = 0;
     r = 0;
     c = 0;
 }
+// declared the variables in the constructor and used row and column to hold values
 Button::Button(int row, int coloum){ //constructor
     clicked = false;
     value = 0;
@@ -19,7 +21,9 @@ Button::Button(int row, int coloum){ //constructor
     c = coloum;
 }
 
-string Button::revealIcon(int value){ //returns picture based on button value 
+// used a switch statement to return pictures based on button value 
+// depending on the value, the map will output a specific color or emoji through the switch statement
+string Button::revealIcon(int value){ 
     switch (value){
         case 0:
             return "🟦";
@@ -42,7 +46,8 @@ string Button::revealIcon(int value){ //returns picture based on button value
     }
 }
 
-//getters and setters
+// We used setters to read the data
+// We used getters to retrive the data
 void Button::isClicked(){
     clicked = true;
 }
@@ -57,6 +62,7 @@ int Button::getValue(){
     return value;
 }
 
+// we have to use an if statement in this setter to create a boundary between 0 and 12 with the rows
 void Button::setR(int row){
     if (row >= 0 || row < 12){
         r = row;
@@ -66,6 +72,7 @@ int Button::getR(){
     return r;
 }
 
+// we had to use an if statement in this setter to create a boundary between 0 and 112 with the columns
 void Button::setC(int col){
     if (col >= 0 || col < 12){
         c = col;

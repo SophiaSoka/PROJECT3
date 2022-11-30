@@ -9,8 +9,8 @@ Person::Person(){
     name = "";
 }
 
-// Here I declared the variables as different names to store them
-Person::Person(string n, int t){
+// Here we declared the variables using t and n to have them hold values
+Person::Person(int t, string n){
     time = t;
     name = n;
 }
@@ -20,12 +20,12 @@ Person::Person(string n, int t){
 int Person::getTime(){
     return time;
 }
-void Person::setTime(int t){
+void Person::setTime(){
     time = t;
 }
 string Person::getName(){
     return name;
 }
-void Person::setName(string n){
+void Person::setName(){
     name = n;
 }

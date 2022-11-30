@@ -11,19 +11,18 @@
 
 using namespace std;
 
-Map::Map()
+// default constructor to reset the map
+Map::Map() 
 {
     resetMap();
 }
 
 /*
- * Algorithm: Resets positions of player, NPCs, and rooms and clears map_data_
+ * Algorithm: Resets positions of player, pirates, and clears map_data_
  * Set Player position coordinates to 0
- * Set npc_count_ to false
- * Set room_count_ to 0
- * loop i from 0 to max_npcs_
+ * loop i from 0 to max_pirates_
  *      Set row and col of location to -1
- * loop i from 0 to max_rooms
+ * loop i from 0 to max_traps_
  *      Set row and col of room location to -1
  * loop i from 0 to num_rows_
  *      loop j from 0 to num_cols_
@@ -79,7 +78,7 @@ int Map::getTrapsCount()
 }
 
 
-// set player position, if in range
+// set player position, if in range, two parameters
 void Map::setPlayerPosition(int row, int col)
 {
     if (isOnMap(row, col))
@@ -123,11 +122,11 @@ bool Map::isOnMap(int row, int col)
 }
 
 /*
- * Algorithm: Checks if the location is an NPC location
+ * Algorithm: Checks if the location is a pirate location
  * if (row, col) is not within the map boundaries
  *      return false
- * loop i from 0 to npc_count_
- *      if (row,col) is a npc location
+ * loop i from 0 to pirate_count_
+ *      if (row,col) is a pirate location
  *          return true
  * return true
  * Parameters: row (int), col (int)
@@ -152,11 +151,11 @@ bool Map::isPiratesLocation(int row, int col)
 }
 
 /*
- * Algorithm: Checks if the location is an room location
+ * Algorithm: Checks if the location is a trap location
  * if (row, col) is not within the map boundaries
  *      return false
- * loop i from 0 to room_count_
- *      if (row,col) is a room location
+ * loop i from 0 to traps_count_
+ *      if (row,col) is a trap location
  *          return true
  * return true
  * Parameters: row (int), col (int)
@@ -186,7 +185,7 @@ bool Map::isTrapsLocation(int row, int col)
  *     return false
  * if map_data_[row][col] is ' ':
  *     return true
- * if (row, col) is npc location and has been found:
+ * if (row, col) is a pirate's position and has been found:
  *     return true
  * else:
  *     return false
@@ -219,14 +218,11 @@ bool Map::isExplored(int row, int col)
  * Algorithm: Checks if the given row and column on map is a free space
  * if row and column is not within the map boundaries
  *      return false
- * if row and column is a npc location
+ * if row and column is a pirate location
  *      return false
- * if row and column is a room location
- *      return false
- * if row and column is the dungeon exit
+ * if row and column is a trap location
  *      return false
  * return true
- *
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
@@ -248,17 +244,16 @@ bool Map::isFreeSpace(int row, int col)
 }
 
 /*
- * Algorithm: Create an NPC on the map
- * if npc is present on map
+ * Algorithm: Create a pirate on the map
+ * if the pirate is greater than max_pirates_ on map
  *      return false
  * if (row,col) is not a free space
  *      return false
- * store row and col values in npcPosition array
- * mark NPC as hidden
- * set (row,col) value in map_data_ to 'N'
- * increment npc_count_
+ * store row and col values in pirate positions array
+ * mark pirate as hidden
+ * set (row,col) value in map_data_ to '10'
+ * increment pirates_count_
  * return true
- *
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
@@ -283,15 +278,15 @@ bool Map::addPirate(int row, int col)
 }
 
 /*
- * Algorithm: Create a room on the map
- * if room_count_ is more than or equal to number of rooms
+ * Algorithm: Create a trap on the map
+ * if traps_count is more than or equal to max_traps_
  *      return false
  * if (row,col) is not a free space
  *      return false
- * if next row in room_positions_ matrix is -1 -1
- *      store row, col and type values in the current row of room_positions_ matrix
- *      increment room_count_
- *      Set (row,col) value in map_data_ to 'R'
+ * if next row in traps_positions is 0, 1
+ *      store row, col and type values in the current row of traps_positions
+ *      increment traps_count
+ *      Set (row,col) value in map_data_ to '11'
  *      return true
  *
  * Parameters: row (int), col (int)
@@ -319,12 +314,19 @@ bool Map::addTrap(int row, int col)
 }
 
 /*
- * Algorithm: Mark (row, col) as explored, either revealing NPC or empty space
- * if (row, col) is NPC location
- *      mark npc at player_position_ as found
+ * Algorithm: Mark (row, col) as explored, either revealing pirate or empty space
+ * if (row, col) is pirate location
+ *      mark pirate at traps_position as found
  * else if (row, col) is a free space
  *      mark space as explored in map data
- *
+ * 
+ * * if (row, col) is trap location
+ *      mark trap at player_position_ as found
+ * else if (row, col) is a free space
+ *      mark space as explored in map data
+ * else if taps do not get solved
+ *      return 4
+ * 
  * Parameters: row (int), col (int)
  * Return: boolean (bool)
  */
@@ -377,9 +379,10 @@ int Map::exploreSpace(int row, int col)
  * if user inputs d and if its not the rightmost column
  *      Move the player right by one column
  * if player moved
- *      if new location is an NPC location
+ *      if new location is an pirate location
  *          mark new location as explored
  *      return true
+ * if the map gets a specific value, then explode the position
  * else
  *      return false
  *
@@ -434,7 +437,7 @@ int Map::move(char direction) //need to find a way to make first postion blue
     default:
         return 0;
     }
-
+    // if the user moves to specific value explode the map
     if(map_data_[player_position_[0]][player_position_[1]].getValue() == 0){
         explode(player_position_[0],player_position_[1]);
     }
@@ -444,16 +447,16 @@ int Map::move(char direction) //need to find a way to make first postion blue
 }
 
 /*
- * Algorithm: This function prints a 2D map in the terminal.
+ * Algorithm: This function prints a 2D map in the terminal based on what the user clicks.
  * Loop i from 0 to number of rows
  *      Loop j from 0 to number of columns
  *          if player position is at (i,j)
- *              print 'X'
- *          else if npc is at (i,j)
- *              if npc has been found:
- *                  print 'N'
+ *              print 'PARTY'
+ *          else if pirate is at (i,j)
+ *              if pirate has been found:
+ *                  print mad_data_ revealed icon
  *              else
- *                  print '-'
+ *                  print '⬜'
  *          else
  *              print the value of (i,j) in map_data_
  *
@@ -483,6 +486,7 @@ void Map::displayMap()
 }
 
 /*
+Algorithm: This function determines if the value in the row and column holds true
 parameters: (int) row, (int) col
 returns: void, just updates the value of buttons around the input corrdinates
     (input value will be corrdinates of a pirate)
@@ -492,10 +496,13 @@ returns: void, just updates the value of buttons around the input corrdinates
 */ 
 
 void Map::trueValue(int row, int col){
+    
     for (int x = row-1; x <= row+1; x++){
         for(int y = col-1; y<= col+1; y++){
+            // checks that the input coordniates are in bounds
             if(x>=0 && y < 12){
                 if(y >= 0 && y < 12){
+                    // makes the inputs change colors
                     if(map_data_[x][y].getValue() != 10 && map_data_[x][y].getValue() != 11){
                         map_data_[x][y].setValue(map_data_[x][y].getValue()+1);
                     }
@@ -505,6 +512,7 @@ void Map::trueValue(int row, int col){
     }
 }
 /*
+Algorithm: This function explodes the row and columns for the map
 parameters: (int) row, (int) col
 returns: void, just updates the buttons around the input corrdinates
     gets all buttons touching the input value by using two rested for loops 
@@ -516,10 +524,13 @@ returns: void, just updates the buttons around the input corrdinates
 void Map::explode(int row, int col){
     for (int x = row-1; x <= row+1; x++){
         for(int y = col-1; y<= col+1; y++){
+            // checks that the surrounding buttons are in bounds
             if(x>=0 && y < 12){
                 if(y >= 0 && y < 12){
+                    // checks if the surrounding buttons aren't a riddle or map and whether or not they've been clicked
                     if((map_data_[x][y].getValue() != 10 && map_data_[x][y].getValue() != 11) && !(map_data_[x][y].getClicked())){
                         map_data_[x][y].isClicked();
+                        // if button isn't touching a pirate or trap it will explode that button, making it recursive
                         if(map_data_[x][y].getValue() == 0){
                             explode(x,y);
                         }
@@ -529,7 +540,18 @@ void Map::explode(int row, int col){
         }
     }
 }
-
+/*
+Algorithm: This function adds all pirates to the map with one parameter
+* Uses srand to randomize the pirates locations
+* Uses a while loop to randomize the pirate in different rows and columns, and will increment the count
+* else if
+    count >= max_pirates_
+        return false
+* if num == count
+    return true
+Paramters: num
+Return: boolean (bool)
+*/
 bool Map::addAllPirates(int num){
     //seed value 
     srand((unsigned) time(NULL));
@@ -553,6 +575,18 @@ bool Map::addAllPirates(int num){
     return true;
 }
 /*
+Algorithm: This function adds all the traps to the map with one parameter
+* Uses srand to randomize the trap locations
+* Uses a while loop to randomize the traps in different rows and columns, and will increment the count
+* else if
+    count >= max_traps_
+        return false
+* if num == count
+    return true
+Paramters: num
+Return: boolean (bool)
+*/
+/*
 bool Map::addAllTraps(int num){
     //seed value 
     srand((unsigned) time(NULL));
@@ -565,7 +599,7 @@ bool Map::addAllTraps(int num){
         if (addTrap(row, col)){
             count++;
         }
-        else if(count>= max_traps_){
+        else if(count >= max_traps_){
             return false;
         }
     }
@@ -575,14 +609,14 @@ bool Map::addAllTraps(int num){
     return false;
 }
 */
-Trap Map:: getTrapAt(int index){
+Trap Map:: getTrapAt(int index){ // returns the trap index
     return traps_[index];
 }
-Pirate Map::getPirateAt(int index){
+Pirate Map::getPirateAt(int index){ // returns the pirate index
     return pirates_[index];
 }
 
-//helper function for readTraps
+//helper function for readTraps, taken from project two
 int split(string input_string, char separator, string arr[], int arr_size){
     //returns 0 if the string is empty 
     if(input_string.length() <= 0){
@@ -607,7 +641,7 @@ int split(string input_string, char separator, string arr[], int arr_size){
             word += input_string[i];
         }
     }
-    //once gone through whole string, adds the lest "word" and returns the total number of strings added 
+    //once gone through whole string, adds the last "word" and returns the total number of strings added 
     arr[count] = word;
     count++;
     return count;
@@ -615,7 +649,7 @@ int split(string input_string, char separator, string arr[], int arr_size){
 
 /*
 parameters: (string) filename
-returns: int,-2, -1 or the number of traps in traps_ array 
+returns: int, -2, -1 or the number of traps in traps_ array 
     creates helper variables 
     checks if there is room in the array (if not return -2)
     opens file (if not returns -1)
@@ -625,7 +659,7 @@ returns: int,-2, -1 or the number of traps in traps_ array
     returns the total number of posts in array 
 */
 //reads in a file and stores each line as a trap object in the traps 
-//alot like the readPosts or readLikes function in project 2
+//a lot like the readPosts or readLikes function in project 2
 int Map::readAndAddTraps(string filename){
     srand((unsigned) time(NULL));
     string temp_arr[4];
@@ -633,10 +667,11 @@ int Map::readAndAddTraps(string filename){
     ifstream fin;
     string line;
     int return_split;
+    // returns -2 if traps_count == max_traps
     if(traps_count_ == max_traps_){
         return -2;
     }
-    //opens file (if not returns -1)
+    // opens file (if not returns -1)
     fin.open(filename);
     if(fin.fail()){
         return -1;
@@ -644,7 +679,9 @@ int Map::readAndAddTraps(string filename){
     int count = 0;
     int row;
     int col;
+    // while loop to retrieve data
     while(getline(fin, line)){
+        // if statement if the line length is greater than zero
         if(line.length() > 0){
             //splits every line of file into an array 
             return_split = split(line, ',', temp_arr, 3);
@@ -654,15 +691,16 @@ int Map::readAndAddTraps(string filename){
                 //puts the post created into array of posts 
                 row = (rand() % 12);
                 col = (rand() % 12);
+                // if statement to addtrap to rows and columns, temparary variable
                 if (addTrap(row, col)){
                     traps_[traps_count_] = temp_trap;
                 }
             }
-        }//if array is full it returns size and ends loop 
+        }// if array is full it returns size and ends loop 
         if(traps_count_ >= max_traps_){
             return traps_count_;
         }
     }
-    //returns the total number of posts in array 
+    // returns the total number of posts in array 
     return traps_count_; 
 }

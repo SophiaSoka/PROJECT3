@@ -4,7 +4,6 @@
 // Project 3 - Button.cpp
 
 #include "Trap.h"
-
 using namespace std;
 
 // default constructor to set the initial values equal to empty and false

@@ -34,9 +34,9 @@ private:
     int pirates_count_;  // stores number of misfortunes currently on map
     int traps_count_; // stores number of sites currently on map
 public:
-    Map();
+    Map(); // default constructor
     void resetMap();
-    // getters
+    // getters used to retrieve the data
     int getPlayerRow();
     int getPlayerCol();
     int getPiratesCount();
@@ -49,10 +49,10 @@ public:
     bool isExplored(int row, int col);
     bool isFreeSpace(int row, int col);
 
-    // setters
+    // setters used to read the data
     void setPlayerPosition(int row, int col);
 
-    // other
+    // booleans for the pirates and traps that involves their rows and columns
     void displayMap();
     int move(char);
     bool addPirate(int row, int col);

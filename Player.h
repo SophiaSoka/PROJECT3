@@ -20,8 +20,8 @@ class Player{
         int num_hints;
         
     public:
-        Player();
-        Player(int lives, string weapon, int hints);
+        Player(); // default constructor
+        Player(int lives, string weapon, int hints); // constructor with parameters
 
         void fightPirate(Pirate pirate);
         bool solveTrap(Trap trap);

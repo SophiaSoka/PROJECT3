@@ -23,7 +23,7 @@ class Trap{
         // We used getters and setters in our h file
         // Declared the variables inside the parameter
         Trap(); // default constructor
-        Trap(string text, string answer, string hint);
+        Trap(string text, string answer, string hint); // constructor with parameters
         
         string getRiddle();
         void setRiddle(string new_riddle);

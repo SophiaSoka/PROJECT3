@@ -8,12 +8,14 @@
 
 using namespace std;
 
+// We declared the values for the variables in the default constructor
 Player::Player (){ //defalut constructor 
     strength = 100;
     lives = 1;
     weapon = "";
     num_hints = 0;
 }
+// We declared the data type of our values in the constructors parameter, along with using different variable names to store values
 Player::Player(int num_lives, string weapon_name, int hint){ //constructor
     strength = 100;
     lives = num_lives;
@@ -21,7 +23,8 @@ Player::Player(int num_lives, string weapon_name, int hint){ //constructor
     num_hints = hint;
 }
 
-//getters and setters 
+//We used getters to retrieve our data
+// We used setters to read our data
 void Player::reduceStrength(int takeAwayStrength){ 
     strength = strength - takeAwayStrength;
 }
@@ -50,6 +53,7 @@ int Player::getNumHints(){
     return num_hints;
 }
 
+// We used a void statement to display the user their inventory throughout the game with cout statements
 void Player::printInventory(){
     cout << "----Player Info----" << endl;
     cout << "Strength:   | " << strength << endl;
@@ -60,6 +64,11 @@ void Player::printInventory(){
     return;
 }
 
+// We used another void statement to interact with the user when they run into a pirate
+// this code will prompt the user their chances of beating the pirate on whether or not they use a weapon, and tell the user the pirate's strength
+// The user will be able to display their inventory to see what they may want to do in this scenario
+// Based on the result of the fight, the user may die and lose the game, or win the fight which will show the user their strength and continue the game
+// We used different cout statements to interact with the user based on their choices, asking the user what they want to do
 void Player::fightPirate(Pirate pirate){
     char display;
     char useWeapon;
@@ -105,7 +114,7 @@ void Player::fightPirate(Pirate pirate){
         cout << "It doesn't look like you have a weapon to fight with. Good Luck!" << endl;
     }
 
-    cout << "Currentily flighting pirate..." << endl;
+    cout << "Currently flighting pirate..." << endl;
     int rand_result = (rand() % 9);
     if(rand_result >= proablilty){
         cout << "You won the fight!! You still have a strength of " << strength << endl;
@@ -143,7 +152,8 @@ void Player::fightPirate(Pirate pirate){
     
     return;
 }
-
+// this bool statement is used for whether or not a user solves a riddle
+// The user will be prompted with the riddle, if they want to use their hints, and whether or not they solved the riddle
 bool Player:: solveTrap(Trap trap){
     string user_answer;
     char useHint;
@@ -151,6 +161,7 @@ bool Player:: solveTrap(Trap trap){
     cout << "If you have a hint you may use it, but once you run out of hints theres no way to get more!!"<< endl;
     cout << "The riddle is: " << trap.getRiddle()<< endl;
     cout << "//Maybe print out options for answers" << endl;
+    // used if statements to prompt the user if they want to use their hints, and an else statement if they have no hints
     if (num_hints > 0){
         cout << "Would you like to use one of your hints? (y/n)" << endl;
         cin >> useHint;
@@ -163,6 +174,7 @@ bool Player:: solveTrap(Trap trap){
     }
     cout << "Please enter your guess: " << endl;
     cin >> user_answer;
+    // used an if statement if the riddle was solved correctly, and an else statement if solved incorrectly
     if(user_answer == trap.getAnswer()){
         cout << "Horray!! You solved it" << endl;
         cout << endl;
@@ -177,9 +189,9 @@ bool Player:: solveTrap(Trap trap){
     return false;
 }
 //independent function 
-/*parameter: takes in a char, representing the resluts of teh game
+/*parameter: takes in a char, representing the results of teh game
 returns: void, prints out differnt information based on what the user decided 
-    prints out the resluts of the game and asks if they want to play again
+    prints out the results of the game and asks if they want to play again
     if the dont't want to play again it asks them if they would like to see the leader board
     if they say yes it is printed out 
 */
@@ -195,7 +207,7 @@ void Player::endGame(char result){
     cout << "Would you like to see the leader board? (y/n)" << endl;
     cin >> view;
     if(view == 'y'){
-        //print leader board 
+        // print leader board 
     }
     else if(view == 'n'){
         cout << "Ok, see you again soon" << endl;

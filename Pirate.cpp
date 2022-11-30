@@ -17,8 +17,8 @@ Pirate::Pirate()
     positionC = 0;
     beenFound = false;
 }
-// Here, we had to declare all of my variables as their type
-// This was used to organize the information
+// Here, we had to declare all of the variables as their type with the new name to hold a value
+// This was used to organize our data
 Pirate::Pirate(int s, int r, int c)
 {
     strength = s;
@@ -26,8 +26,9 @@ Pirate::Pirate(int s, int r, int c)
     positionC = c;
     beenFound = false;
 }
-// We used getters and setters to retrieve the data from the h files we made
-// We had to return the variables in the getters, and set them equal to a value in the setters
+// We used getters to retrieve our data
+// We used setters here to read the data from files
+// We also used a separate declaration to state whether or not beenfound held true
 int Pirate::getStrength()
 {
     return strength;
