@@ -222,7 +222,8 @@ int main(){
         cout << "2. Show Inventory" << endl;
         cout << "3. Display Board" << endl;
         cout << "4. Display Leaderboard" << endl;
-        cout << "5. Quit" << endl;
+        cout << "5. Display Player Strength" << endl;
+        cout << "6. Quit" << endl;
         cin >> str_command;
         // Used an if statement to run option one
         if(str_command.length() == 1){
@@ -318,6 +319,9 @@ int main(){
                 map.printLeaderboard("leaderboard.txt");
                 break;
             case '5':
+                p.printStrength();
+                break;
+            case '6':
                 cout << "Thanks for playing, see you again soon!" << endl;
                 return 0;
             default:
