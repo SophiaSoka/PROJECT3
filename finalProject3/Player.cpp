@@ -65,12 +65,16 @@ int Player::getNumKeys(){
 // We used a void statement to display the user their inventory throughout the game with cout statements
 void Player::printInventory(){
     cout << "----Player Info----" << endl;
-    cout << "Strength:   | " << strength << endl;
     cout << "Lives:      | " << lives <<endl;
     cout << "Weapon:     | " << weapon << endl;
     cout << "Hints:      | " << num_hints << endl;
     cout << "Keys:       | " << num_keys << endl;
     cout << "-------------------" << endl;
+    return;
+}
+
+void Player::printStrength(){
+    cout << "Strength:   | " << strength << endl;
     return;
 }
 
