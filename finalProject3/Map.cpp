@@ -722,10 +722,12 @@ void Map:: printLeaderboard(string filename){
         if(line.length() > 0){
             split(line, ',', temp_arr, 3);
             Person temp_person = Person(temp_arr[0], stoi(temp_arr[1]), stoi(temp_arr[2]));
-            cout << (count+1) << ": " ;
-            cout << temp_person.getName() << " - " << temp_person.getMoves() <<  " - level: " << temp_person.getLevel() << endl;
-            count++;
+            leaderboard.push_back(temp_person);
         }
+    }
+    for(int i = 0; i < leaderboard.size(); i++){
+        cout << i+1 << ": ";
+        cout << leaderboard.at(i).getName() << ", score: "<< leaderboard.at(i).getMoves() << ", level: " << leaderboard.at(i).getLevel() << endl;
     }
 }
 int Map::updateLeaderboardFile(string filename, Person new_person){
@@ -760,27 +762,12 @@ int Map::updateLeaderboardFile(string filename, Person new_person){
         leaderboard.push_back(new_person);
         added =true;
     }
+
     ofstream fout;
     fout.open(filename);
     for(int i = 0; i < leaderboard.size(); i++){
         fout << leaderboard.at(i).getName() << ","<< leaderboard.at(i).getMoves() << "," << leaderboard.at(i).getLevel() << endl;
-        r++;
     }
     fout.close();
-    return r;
+    return 0;
 }
-/*
-bool Map::addPerson(Person new_person, vector<Person> leaderboard){
-    int new_moves = new_person.getMoves();
-    int temp_moves = 0;
-    for(int i = 0; i < leaderboard.size(); i++){
-        temp_moves = leaderboard.at(i).getMoves();
-        if(temp_moves > new_moves){
-            leaderboard.insert(leaderboard.begin() + i, new_person);
-            return true;
-        }
-    }
-    leaderboard.push_back(new_person);
-    return true;
-}
-*/
