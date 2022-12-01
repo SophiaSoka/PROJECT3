@@ -80,7 +80,6 @@ public:
 
     void printLeaderboard(string filename);
     int updateLeaderboardFile(string filename, Person new_person);
-    bool addPerson(Person new_person, vector<Person> leaderboard);
 
     Trap getTrapAt(int index);
     Pirate getPirateAt(int index);
