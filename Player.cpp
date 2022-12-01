@@ -191,7 +191,7 @@ bool Player:: solveTrap(Trap trap){
     cout << "8. Because they always gets lost at C" << endl;
     cout << "9. Because they don't have ID" << endl;
     
-    cout << "Please enter your guess: " << endl;
+    cout << "Please enter the number next to your guess: " << endl;
     cin >> user_answer;
     // used an if statement if the riddle was solved correctly, and an else statement if solved incorrectly
     if(user_answer == trap.getAnswer()){
