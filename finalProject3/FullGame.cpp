@@ -70,12 +70,12 @@ int main(){
     int extra_life;
     int total_lives = 1;
     cout << "Mr. Jones, it is good to see you again. Have you come for more supplies?" << endl;
-    // We used a while loop to prompt the user on what they can purchase if they have more than 20 coins, used cout statements to display this
-    while(coins >= 20){
+    // We used a while loop to prompt the user on what they can purchase if they have more than 30 coins, used cout statements to display this
+    while(coins >= 30){
         cout << endl;
         cout << "You have " << coins << " coins in the bank" << endl;
         cout << "Choose one of the following:" << endl;
-        cout << "1.) Weapon(20 coins): You will need a weapon to fight the pirates along your journey" << endl;
+        cout << "1.) Weapon(30 coins): You will need a weapon to fight the pirates along your journey" << endl;
         cout << "2.) Hints(30 coins): In your journey, there will be riddles you will need to solve in order to not get killed from a boobytrap." << endl;
         cout << "3.) Extra-life(50 coins): You may need an extra-life if you are unable to solve a riddle or fight a pirate." << endl;
         cin >> input;
@@ -85,32 +85,32 @@ int main(){
         // Will print not enough coins if the user has not enough coins
         if(input == 1)
         {
-            if(coins >= 20){
+            if(coins >= 30){
                 cout << "There are a couple of different weapon options, each has the same damage level though." << endl;
                 cout << "Choose one of the following:" << endl;
-                cout << "1.) Sword (50 damage) (20 coins)" << endl;
-                cout << "2.) Hatchet (50 damage) (20 coins)" << endl;
-                cout << "3.) Machete (50 damage) (20 coins)" << endl;
+                cout << "1.) Sword (50 damage) (30 coins)" << endl;
+                cout << "2.) Hatchet (50 damage) (30 coins)" << endl;
+                cout << "3.) Machete (50 damage) (30 coins)" << endl;
                 cout << "4.) Input 4 if you want to cancel" << endl;
                 cin >> weapon;
                 if(weapon == '1')
                 {
                     weapon_int = 1;
-                    coins -= 20;
+                    coins -= 30;
                     name_of_weapon = "sword";
                     cout << "Acquired sword (50 damage)." << endl;
                 }
                 else if(weapon == '2')
                 {
                     weapon_int = 2;
-                    coins -= 20;
+                    coins -= 30;
                     name_of_weapon = "hatchet";
                     cout << "Acquired hatchet (50 damage)." << endl;
                 }
                 else if(weapon == '3')
                 {
                     weapon_int = 3;
-                    coins -= 20;
+                    coins -= 30;
                     name_of_weapon = "machete";
                     cout << "Acquired Machete (50 damage)." << endl;
                 }
