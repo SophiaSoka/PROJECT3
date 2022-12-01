@@ -88,31 +88,31 @@ int main(){
             if(coins >= 30){
                 cout << "There are a couple of different weapon options, each has the same damage level though." << endl;
                 cout << "Choose one of the following:" << endl;
-                cout << "1.) Sword (50 damage) (30 coins)" << endl;
-                cout << "2.) Hatchet (50 damage) (30 coins)" << endl;
-                cout << "3.) Machete (50 damage) (30 coins)" << endl;
-                cout << "4.) Input 4 if you want to cancel" << endl;
+                cout << "1.) Sword" << endl;
+                cout << "2.) Hatchet" << endl;
+                cout << "3.) Machete" << endl;
+                cout << "4.) To cancel" << endl;
                 cin >> weapon;
                 if(weapon == '1')
                 {
                     weapon_int = 1;
                     coins -= 30;
                     name_of_weapon = "sword";
-                    cout << "Acquired sword (50 damage)." << endl;
+                    cout << "Acquired sword." << endl;
                 }
                 else if(weapon == '2')
                 {
                     weapon_int = 2;
                     coins -= 30;
                     name_of_weapon = "hatchet";
-                    cout << "Acquired hatchet (50 damage)." << endl;
+                    cout << "Acquired hatchet." << endl;
                 }
                 else if(weapon == '3')
                 {
                     weapon_int = 3;
                     coins -= 30;
                     name_of_weapon = "machete";
-                    cout << "Acquired Machete (50 damage)." << endl;
+                    cout << "Acquired Machete." << endl;
                 }
                 else if(weapon == '4')
                 {
