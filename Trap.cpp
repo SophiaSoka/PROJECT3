@@ -1,0 +1,61 @@
+// CSCI 1300 Fall 2022
+// Author: Sophia Soka and Matthew Keane
+// Sophia Soka's Rec: Recitation:306 - Zachary Atkins, Matthew Keane's Rec: Recitation 102 - Ojasvi Bhalerao
+// Project 3 - Trap.cpp
+
+#include "Trap.h"
+using namespace std;
+
+// default constructor to set the initial values equal to empty and false
+Trap::Trap(){
+    riddle = "";
+    answer = -1;
+    hint = "";
+    hasFound = false;
+    solved = false;
+}
+// Here, we had to declare all of my variables as their type
+// This was used to organize the information
+Trap::Trap(string text, int ans, string h){
+    riddle = text;
+    answer = ans;
+    hint = h;
+    hasFound = false;
+    solved = false;
+}
+// We used getters and setters to retrieve the data from the h files we made
+// We had to return the variables for the getters, and set them equal to a value in the setters
+string Trap::getRiddle(){
+    return riddle;
+}
+void Trap::setRiddle(string new_riddle){
+    riddle = new_riddle;
+}
+
+int Trap::getAnswer(){
+    return answer;
+}
+void Trap::setAnswer(int new_answer){
+    answer = new_answer;
+}
+
+string Trap::getHint(){
+    return hint;
+}
+void Trap::setHint(string new_hint){
+    hint = new_hint;
+}
+
+bool Trap::getFound(){
+    return hasFound;
+}
+void Trap::wasFound(){
+    hasFound = true;
+}
+
+bool Trap::getSolved(){
+    return solved;
+}
+void Trap::wasSolved(){
+    solved = true;
+}
