@@ -181,15 +181,15 @@ bool Player:: solveTrap(Trap trap){
         cout << "It doesn't look like you have any hints, good luck!!" << endl;
     }
     
-    cout << "1. " << endl;
-    cout << "2. " << endl;
-    cout << "3. " << endl;
-    cout << "4. " << endl;
-    cout << "5. " << endl;
-    cout << "6. " << endl;
-    cout << "7. " << endl;
-    cout << "8. " << endl;
-    cout << "9. " << endl;
+    cout << "1. Because they're busy at sea" << endl;
+    cout << "2. R" << endl;
+    cout << "3. Because it was rated R" << endl;
+    cout << "4. None, they don't go to school" << endl;
+    cout << "5. High C's" << endl;
+    cout << "6. To the dock" << endl;
+    cout << "7. To the sea" << endl;
+    cout << "8. Because they always gets lost at C" << endl;
+    cout << "9. Because they don't have ID" << endl;
     
     cout << "Please enter your guess: " << endl;
     cin >> user_answer;
