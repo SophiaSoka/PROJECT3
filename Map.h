@@ -27,11 +27,11 @@ private:
     static const int max_pirates_ = 20;  // max non-player characters
     static const int max_traps_ = 10; // max number of traps
     
-    Trap t1 = Trap("What grades did the pirate get in school?","High C's","Think about the high sea during a storm...");
-    Trap t2 = Trap("What is a pirate's favorite letter?","R","Most pirates say aarrr matey");
-    Trap t3 = Trap("Where do you take a sick pirate ship?","To the dock","Where do you put a ship when you are done using it");
-    Trap t4 = Trap("Why can't a pirate finish the alphabet?","Because he always gets lost at sea","Pirates tend to get lost here");
-    Trap t5 = Trap("Why couldn't the pirate get into the pirate movie?","Because it was rated r","A pirate is known for saying this when frustrated");
+    Trap t1 = Trap("What grades did the pirate get in school?",5,"Think about the high sea during a storm...");
+    Trap t2 = Trap("What is a pirate's favorite letter?",2,"Most pirates say aarrr matey");
+    Trap t3 = Trap("Where do you take a sick pirate ship?",6,"Where do you put a ship when you are done using it");
+    Trap t4 = Trap("Why can't a pirate finish the alphabet?",8,"Pirates tend to get lost here");
+    Trap t5 = Trap("Why couldn't the pirate get into the pirate movie?",3,"A pirate is known for saying this when frustrated");
     Trap traps_[5] = {t1, t2, t3, t4, t5};
     //Trap traps_[max_traps_];
     Pirate pirates_[max_pirates_];
