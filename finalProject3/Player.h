@@ -43,5 +43,7 @@ class Player{
 
         void printInventory();
         bool endGame(char result);
+
+        void printStrength();
 };
 #endif
