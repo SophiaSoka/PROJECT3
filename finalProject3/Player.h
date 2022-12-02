@@ -41,9 +41,9 @@ class Player{
         void setNumHints(int hints);
         int getNumHints();
 
+        void printStrength();
+
         void printInventory();
         bool endGame(char result);
-
-        void printStrength();
 };
 #endif

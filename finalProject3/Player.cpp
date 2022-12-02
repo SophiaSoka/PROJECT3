@@ -62,6 +62,11 @@ int Player::getNumKeys(){
     return num_keys;
 }
 
+void Player::printStrength(){
+    cout << "Strength:   | " << strength << endl;
+    return;
+ }
+
 // We used a void statement to display the user their inventory throughout the game with cout statements
 void Player::printInventory(){
     cout << "----Player Info----" << endl;
@@ -70,11 +75,6 @@ void Player::printInventory(){
     cout << "Hints:      | " << num_hints << endl;
     cout << "Keys:       | " << num_keys << endl;
     cout << "-------------------" << endl;
-    return;
-}
-
-void Player::printStrength(){
-    cout << "Strength:   | " << strength << endl;
     return;
 }
 
@@ -235,10 +235,12 @@ bool Player::endGame(char result){
     }
     else if(view == 'n'){
         cout << "Ok, see you again soon" << endl;
+        return_val = false;
     }
     else{
         cout << "Invalid input." << endl;
         cout << "You can find the leaderboard in the leaderboard.txt file" << endl;
+        return_val = false;
     }
-    return false;;
+    return return_val;
 }

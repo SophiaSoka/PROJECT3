@@ -81,6 +81,7 @@ public:
     void printLeaderboard(string filename);
     int updateLeaderboardFile(string filename, Person new_person);
 
+
     Trap getTrapAt(int index);
     Pirate getPirateAt(int index);
     };

@@ -70,7 +70,7 @@ int main(){
     int extra_life;
     int total_lives = 1;
     cout << "Mr. Jones, it is good to see you again. Have you come for more supplies?" << endl;
-    // We used a while loop to prompt the user on what they can purchase if they have more than 30 coins, used cout statements to display this
+    // We used a while loop to prompt the user on what they can purchase if they have more than 20 coins, used cout statements to display this
     while(coins >= 30){
         cout << endl;
         cout << "You have " << coins << " coins in the bank" << endl;
@@ -141,12 +141,7 @@ int main(){
                 {
                     coins -= 30;
                     total_hints ++;
-                    //cout << "Hints:" << endl;
-                    //cout << "1.) Think about the high sea during a storm..." << endl;
-                    //cout << "2.) Most pirates say aarrr matey" << endl;
-                    //cout << "3.) Where do you put a ship when you are done using it" << endl;
-                    //cout << "4.) Pirates tend to get lost here" << endl;
-                    //cout << "5.) A pirate is known for saying this when frustrated" << endl;
+                    cout << "Hint Acquired." << endl;
                 }
                 // We used an else if statement if the user selected option two which will cancel and return the user to the option menu
                 else if(hint == 2)
@@ -211,6 +206,7 @@ int main(){
     //cout << "Hint: " << map.getTrapAt(traps_found).getHint() << endl;
     //cout << map.getTrapsCount() << endl;
     int return_val;
+    Person new_winner;
     //bool playing = true;
     string str_command;
     char command;
@@ -258,9 +254,9 @@ int main(){
                 // We used a for loop with multiple if and if else statements to prompt the user on where to move, traps, or pirates
                 for(int i = 0; i < moves; i++){
                     if(p.getNumKeys() == 3){
+                        int num;
                         Person new_winner = Person(name, num_moves, level_int);
-                        map.updateLeaderboardFile("leaderboard.txt", new_winner);
-                        p.endGame('w');
+                        num = map.updateLeaderboardFile("leaderboard.txt", new_winner);
                         if(p.endGame('w')){
                             map.printLeaderboard("leaderboard.txt");
                         }
@@ -330,5 +326,4 @@ int main(){
         }
     }
     return 0;
-
 }
