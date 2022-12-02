@@ -22,11 +22,11 @@ ABOUT THIS PROJECT
 ------------------------
 This project is a game where a user must collect three keys in order to win.
 The user must navagate through the map while trying to avoid or fight pirates, 
-while finding traps that contain riddles which must must be solved inorder to 
+while finding traps that contain riddles which must must be solved in order to 
 collect the keys. The user can purchase weapons, hints and lives from a 
 merchant at the beggining of the game to help them naviagte through the map. 
 Each Pirate and Trap will be placed randomily on the map for the user to discover. 
 Pirates are also randomily assigned strength levels and the proability of winning
-against a Pirate changes depending on if the user decides to use their weapon. If 
+against a Pirate changes depending on if the user decides to use their weapon. If a
 user collects three keys they will win the game and be added to the leaderboard.txt 
 file, which ranks players based on the number of times they move. 
